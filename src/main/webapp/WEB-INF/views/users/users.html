@@ -6,6 +6,10 @@
     <title></title>
 </head>
 <body>
+
+<a th:href = "@{users/new}"> <h2>Create New User</h2> </a>
+<br/>
+<hr/>
 <div>
     <th:block th:each="usr : ${users}">
 

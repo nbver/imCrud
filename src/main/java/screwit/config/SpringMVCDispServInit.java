@@ -8,9 +8,10 @@ import javax.servlet.ServletException;
 
 
 public class SpringMVCDispServInit extends AbstractAnnotationConfigDispatcherServletInitializer {
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class[]{HibernateConfig.class};
     }
 
     @Override
