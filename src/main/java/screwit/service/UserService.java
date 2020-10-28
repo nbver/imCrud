@@ -1,10 +1,10 @@
-package screwit.dao;
+package screwit.service;
 
 import screwit.model.User;
 
 import java.util.List;
 
-public interface UserDao {
+public interface UserService {
     User getUserById(int id);
     List<User> getAllUsers();
     void delete(int id);

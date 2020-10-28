@@ -1,32 +1,27 @@
 package screwit.model;
 
-import org.springframework.context.annotation.Primary;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "users")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+
+    private int id;
     private String name;
     private String lastName;
 
     public User() {
     }
 
-    public User(long id, String name, String lastName) {
+    public User(int id, String name, String lastName) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -44,5 +39,14 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }
