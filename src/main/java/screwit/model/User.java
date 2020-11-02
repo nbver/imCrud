@@ -2,6 +2,7 @@ package screwit.model;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -9,57 +10,53 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "lastname")
-    private String lastName;
+    private long id;
+    @Column(name = "username")
+    private String username;
+    @Column(name = "password")
+    private  String password;
+    @ManyToMany
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public User() {
     }
 
-    public User(String name, String lastName) {
-        this.name = name;
-        this.lastName = lastName;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-
-    public User(int id, String name, String lastName) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public int getId() {
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getPassword() {
+        return password;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

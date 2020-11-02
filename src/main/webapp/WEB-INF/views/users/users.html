@@ -13,7 +13,7 @@
 <div>
     <th:block th:each="usr : ${users}">
 
-        <a th:href = "@{users/{id}(id = ${usr.getId()})}" th:text="${usr.getName()}"></a>
+        <a th:href = "@{users/{id}(id = ${usr.getId()})}" th:text="${usr.getUsername()}"></a>
         <br>
 
     </th:block>

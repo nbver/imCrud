@@ -5,9 +5,9 @@ import screwit.model.User;
 import java.util.List;
 
 public interface UserDao {
-    User getUserById(int id);
+    User getUserById(long id);
     List<User> getAllUsers();
-    void delete(int id);
-    void edit(int id, User user);
+    void delete(long id);
+    void edit(long id, User user);
     void add(User user);
 }

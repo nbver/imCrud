@@ -4,17 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import screwit.model.Role;
 import screwit.model.User;
-import screwit.service.SimpleUserServiceImpl;
 import screwit.service.UserService;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
     @Autowired
     UserService userService ;
+
+
+
 
     @GetMapping
     public String showAllUsers(Model model){
@@ -38,28 +43,29 @@ public class UserController {
 
     @PostMapping
     public String saveUser(@ModelAttribute("user") User user){
-        User userToAdd = new User();
-        userToAdd.setName(user.getName());
-        userToAdd.setLastName(user.getLastName());
-        userService.add(userToAdd);
+//        User userToAdd = new User();
+//        userToAdd.setUsername(user.getUsername());
+//        userToAdd.setPassword(user.getPassword());
+
+        userService.add(user);
         return "redirect:/users";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id){
+    public String edit(Model model, @PathVariable("id") long id){
         //User testUser = new User(99, "testName","testLastName");
         model.addAttribute("user", userService.getUserById(id));
         return  "users/edit";
     }
 
     @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") int id){
+    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") long id){
         userService.edit(id, user);
         return "redirect:/users";
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable("id") int id){
+    public String deleteUser(@PathVariable("id") long id){
         userService.delete(id);
         return "redirect:/users";
     }

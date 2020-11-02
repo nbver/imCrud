@@ -1,6 +1,5 @@
 package screwit.dao;
 
-import org.springframework.stereotype.Component;
 import screwit.model.User;
 
 import java.util.*;
@@ -10,11 +9,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SimpleUserDaoImp implements UserDao {
 
    private static final AtomicInteger AUTO_ID = new AtomicInteger(0);
-   private static Map<Integer, User> users = new HashMap<>();
+   private static Map<Long, User> users = new HashMap<Long, User>();
 
    static {
-      User user1= new User(AUTO_ID.getAndIncrement(), "pasha", "pashin");
-      User user2 = new User(AUTO_ID.getAndIncrement(), "masha", "masina");
+      User user1= new User( "pasha", "pashin");
+      User user2 = new User( "masha", "masina");
       users.put(user1.getId(), user1);
       users.put(user2.getId(), user2);
 
@@ -22,7 +21,7 @@ public class SimpleUserDaoImp implements UserDao {
 
 
    @Override
-   public User getUserById(int id) {
+   public User getUserById(long id) {
       List<User> userList = new ArrayList<>(users.values());
       return userList.stream().filter(user -> user.getId() == id).findAny().orElse(null);
    }
@@ -33,15 +32,15 @@ public class SimpleUserDaoImp implements UserDao {
    }
 
    @Override
-   public void delete(int id) {
+   public void delete(long id) {
       users.remove(id);
    }
 
    @Override
-   public void edit(int id, User user) {
+   public void edit(long id, User user) {
       User userToEdit = users.get(id);
-      userToEdit.setName(user.getName());
-      userToEdit.setLastName(user.getLastName());
+      userToEdit.setUsername(user.getUsername());
+      userToEdit.setPassword(user.getPassword());
    }
 
    @Override

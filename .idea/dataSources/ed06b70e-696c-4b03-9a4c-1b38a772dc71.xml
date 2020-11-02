@@ -9,7 +9,7 @@
     </root>
     <schema id="2" parent="1" name="crud_db">
       <Current>1</Current>
-      <Collation>utf8mb4_0900_ai_ci</Collation>
+      <Collation>utf8_unicode_ci</Collation>
     </schema>
     <schema id="3" parent="1" name="information_schema">
       <Collation>utf8_general_ci</Collation>
@@ -921,25 +921,95 @@ SELECT|sys.sys_config:null
       <ObjectGrants>SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,RELOAD,SHUTDOWN,PROCESS,FILE,REFERENCES,INDEX,ALTER,SHOW DATABASES,SUPER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,REPLICATION SLAVE,REPLICATION CLIENT,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,CREATE USER,EVENT,TRIGGER,CREATE TABLESPACE!
 </ObjectGrants>
     </user>
-    <table id="288" parent="2" name="users"/>
-    <column id="289" parent="288" name="id">
+    <table id="288" parent="2" name="roles"/>
+    <table id="289" parent="2" name="user_roles"/>
+    <table id="290" parent="2" name="users"/>
+    <column id="291" parent="288" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="290" parent="288" name="name">
+    <column id="292" parent="288" name="role">
       <Position>2</Position>
-      <DataType>varchar(45)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="291" parent="288" name="lastname">
-      <Position>3</Position>
-      <DataType>varchar(45)|0s</DataType>
-    </column>
-    <key id="292" parent="288" name="PRIMARY">
+    <key id="293" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
+    </key>
+    <column id="294" parent="289" name="user_id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="295" parent="289" name="role_id">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="296" parent="289" name="user_id">
+      <ColNames>user_id
+role_id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="297" parent="289" name="role_id">
+      <ColNames>role_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="298" parent="289" name="user_id">
+      <ColNames>user_id
+role_id</ColNames>
+      <UnderlyingIndexName>user_id</UnderlyingIndexName>
+    </key>
+    <foreign-key id="299" parent="289" name="user_roles_ibfk_1">
+      <ColNames>user_id</ColNames>
+      <RefTableName>users</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="300" parent="289" name="user_roles_ibfk_2">
+      <ColNames>role_id</ColNames>
+      <RefTableName>roles</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="301" parent="290" name="id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="302" parent="290" name="username">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="303" parent="290" name="password">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <index id="304" parent="290" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="305" parent="290" name="username_UNIQUE">
+      <ColNames>username</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="306" parent="290" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="307" parent="290" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
+    </key>
+    <key id="308" parent="290" name="username_UNIQUE">
+      <ColNames>username</ColNames>
+      <UnderlyingIndexName>username_UNIQUE</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

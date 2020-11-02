@@ -18,7 +18,7 @@ public class JpaDaoImpl implements UserDao{
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUserById(long id) {
         return  entityManager.find(User.class, id );
     }
 
@@ -31,12 +31,12 @@ public class JpaDaoImpl implements UserDao{
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         entityManager.remove( entityManager.find(User.class, id) );
     }
 
     @Override
-    public void edit(int id, User user) {
+    public void edit(long id, User user) {
          entityManager.merge( user );
     }
 
