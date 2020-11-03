@@ -1,5 +1,6 @@
 package screwit.dao;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import screwit.model.User;
 
 import java.util.*;
@@ -47,6 +48,11 @@ public class SimpleUserDaoImp implements UserDao {
    public void add(User user) {
       user.setId(AUTO_ID.getAndIncrement());
       users.put(user.getId(), user);
+   }
+
+   @Override
+   public UserDetails getUserByUsername(String s) {
+      return null;
    }
 
 }
