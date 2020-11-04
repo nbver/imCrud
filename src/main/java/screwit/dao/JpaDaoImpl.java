@@ -39,7 +39,11 @@ public class JpaDaoImpl implements UserDao{
 
     @Override
     public void edit(long id, User user) {
-         entityManager.merge( user );
+        //User userToUpdate = entityManager.find(User.class, id);
+        //userToUpdate.setRoles(user.getRoles());
+
+
+         entityManager.merge(user);
     }
 
     @Override

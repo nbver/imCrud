@@ -11,8 +11,21 @@
     <input type="text" th:field="*{username}" id="username"/>
     <label for="password">Enter password: </label>
     <input type="text" th:field="*{password}" id="password"/>
+
     <br/>
+
+
+        <div th:each = "role : ${roleMap}">
+            <input type="checkbox" name = "list"  th:value="${role.key}" th:checked="${role.value}" />
+            <label th:text = "${role.key}"></label>
+        </div>
+
+
+
     <input type="submit" value="update"/>
+
+
+
 </form>
 
 </body>

@@ -41,6 +41,9 @@ public class SimpleUserServiceImpl implements UserService {
     @Transactional
     @Override
     public void edit(long id, User user) {
+        //Set<Role> roleSet = new HashSet<>();
+       // roleSet.add(roleDao.findByRole("ROLE_USER"));
+        //user.setRoles(roleSet);
         userDao.edit(id, user);
     }
     @Transactional
@@ -51,4 +54,17 @@ public class SimpleUserServiceImpl implements UserService {
         user.setRoles(roles);
         userDao.add(user);
     }
+
+    @Transactional
+    @Override
+    public Set<Role> findAllRoles() {
+        return roleDao.findAll();
+    }
+    @Transactional
+    @Override
+    public Role findRole(String role) {
+        return roleDao.findByRole(role);
+    }
+
+
 }

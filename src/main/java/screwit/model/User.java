@@ -1,11 +1,13 @@
 package screwit.model;
 
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,6 +22,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private  String password;
     @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
@@ -38,6 +41,14 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<String> getRolesAsStrings(){
+        Set<String> stringRoles = new HashSet<>();
+        for (Role role: roles) {
+            stringRoles.add(role.getRole());
+        }
+        return stringRoles;
     }
 
     public long getId() {
@@ -93,5 +104,9 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public boolean hasRole(Role role){
+        return roles.contains(role);
     }
 }

@@ -7,8 +7,7 @@ import screwit.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class RoleDaoJpaImpl implements RoleDao{
@@ -28,5 +27,14 @@ public class RoleDaoJpaImpl implements RoleDao{
             return  roles.get(0);
         }
         return null;
+    }
+
+    @Override
+    public Set<Role> findAll() {
+        List<Role> roles = new ArrayList<>();
+        Query query = entityManager.createQuery( "from Role");
+        roles =  query.getResultList();
+        Set<Role> rolesSet = new HashSet(roles);
+        return rolesSet;
     }
 }
