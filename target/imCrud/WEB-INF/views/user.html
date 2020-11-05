@@ -10,7 +10,12 @@
 
 User Name:
 <span th:text="${user.getUsername()}">VALUE</span>
+<br/>
 User ID:
 <span th:text="${user.getId()}">VALUE</span>
 </body>
+
+<br/>
+<a th:href="@{/users}">Show All Users</a>
+
 </html>
