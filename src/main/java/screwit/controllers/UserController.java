@@ -14,8 +14,13 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/admin")
 public class UserController {
+
+    private final UserService userService;
+
     @Autowired
-    UserService userService ;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public String showAllUsers(Model model){
@@ -39,10 +44,6 @@ public class UserController {
 
     @PostMapping
     public String saveUser(@ModelAttribute("user") User user){
-//        User userToAdd = new User();
-//        userToAdd.setUsername(user.getUsername());
-//        userToAdd.setPassword(user.getPassword());
-
         userService.add(user);
         return "redirect:/users";
     }
@@ -51,12 +52,10 @@ public class UserController {
     public String edit(Model model, @PathVariable("id") long id){
         User user = userService.getUserById(id);
         Set<String> userRoles = user.getRolesAsStrings();
-
         Set<Role> allRoles = userService.findAllRoles();
         Set<String> allStringRoles = allRoles.stream().
                                     map(role -> role.getRole()).
                                     collect(Collectors.toSet());
-
         Map<String, Boolean> roleMap = new HashMap<>();
         for (String role: allStringRoles) {
             if (userRoles.contains(role)){
@@ -70,8 +69,6 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("roleMap", roleMap);
         model.addAttribute("allStringRoles", allStringRoles);
-
-
 
         return  "admin/edit";
     }

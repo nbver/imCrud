@@ -15,8 +15,13 @@ import java.util.List;
 @RequestMapping("/")
 public class LoginController {
 
+    private final UserService userService;
+
     @Autowired
-    UserService userService ;
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
+
 
     @GetMapping("login")
     public String loginPage(){
@@ -24,7 +29,7 @@ public class LoginController {
     }
 
     @GetMapping("users")
-    public String showUsers(Model model){
+    public String showUsers(Model model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "users";

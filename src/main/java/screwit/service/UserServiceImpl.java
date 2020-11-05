@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class SimpleUserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;

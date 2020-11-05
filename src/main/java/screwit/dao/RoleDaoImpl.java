@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import java.util.*;
 
 @Repository
-public class RoleDaoJpaImpl implements RoleDao{
+public class RoleDaoImpl implements RoleDao{
 
     @PersistenceContext
     EntityManager entityManager;

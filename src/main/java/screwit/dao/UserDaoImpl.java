@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class JpaDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao{
 
     @PersistenceContext
     EntityManager entityManager;
 
-    public JpaDaoImpl() {
+    public UserDaoImpl() {
     }
 
     @Override
@@ -39,10 +39,6 @@ public class JpaDaoImpl implements UserDao{
 
     @Override
     public void edit(long id, User user) {
-        //User userToUpdate = entityManager.find(User.class, id);
-        //userToUpdate.setRoles(user.getRoles());
-
-
          entityManager.merge(user);
     }
 

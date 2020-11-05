@@ -9,8 +9,9 @@
 <div th:insert="~{/logout::logout_button}"/>
 
 User Name:
-<p th:text="${user.getUsername()}">VALUE</p>
+<span th:text="${user.getUsername()}">VALUE</span>
+<br/>
 User ID:
-<p th:text="${user.getId()}">VALUE</p>
+<span th:text="${user.getId()}">VALUE</span>
 </body>
 </html>
