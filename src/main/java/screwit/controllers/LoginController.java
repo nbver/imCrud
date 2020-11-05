@@ -1,6 +1,8 @@
 package screwit.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import screwit.model.User;
 import screwit.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -37,8 +40,13 @@ public class LoginController {
 
     @GetMapping("user/{id}")
     public String showUser(Model model, @PathVariable("id") int id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User principalUser =(User) authentication.getPrincipal();
         User user = userService.getUserById(id);
-        model.addAttribute("user", user);
-        return "/user";
+        if (principalUser.getId() == user.getId()){
+            model.addAttribute("user", user);
+            return "/user";
+        }
+        return "redirect:/users";
     }
 }
