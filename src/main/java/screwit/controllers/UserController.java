@@ -73,27 +73,21 @@ public class UserController {
         return  "admin/edit";
     }
 
-    @PatchMapping("/{id}")
+    @PostMapping("/edit/{id}")
     public String updateUser(@ModelAttribute("user") User user,
                              @RequestParam("list") ArrayList<String> list,
                              @PathVariable("id") long id){
 
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
         Set<Role> newRoles = new HashSet<>();
         for(String s: list){
             newRoles.add(userService.findRole(s));
         }
-
-        for(Role role: newRoles){
-            System.out.println(role.getRole());
-        }
         user.setRoles(newRoles);
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
         userService.edit(id, user);
         return "redirect:/users";
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id){
         userService.delete(id);
         return "redirect:/users";

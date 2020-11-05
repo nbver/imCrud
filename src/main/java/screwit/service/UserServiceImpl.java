@@ -31,20 +31,21 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+        return userDao.findAll();
     }
     @Transactional
     @Override
     public void delete(long id) {
-        userDao.delete(id);
+        userDao.deleteById(id);
     }
     @Transactional
     @Override
     public void edit(long id, User user) {
+        //userDao.deleteById(id);
         //Set<Role> roleSet = new HashSet<>();
        // roleSet.add(roleDao.findByRole("ROLE_USER"));
         //user.setRoles(roleSet);
-        userDao.edit(id, user);
+        userDao.save(user);
     }
     @Transactional
     @Override
@@ -52,13 +53,13 @@ public class UserServiceImpl implements UserService {
         Set<Role> roles = new HashSet<>();
         roles.add(roleDao.findByRole("ROLE_USER"));
         user.setRoles(roles);
-        userDao.add(user);
+        userDao.save(user);
     }
 
     @Transactional
     @Override
     public Set<Role> findAllRoles() {
-        return roleDao.findAll();
+        return new HashSet<>(roleDao.findAll());
     }
     @Transactional
     @Override

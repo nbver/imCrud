@@ -1,16 +1,17 @@
 package screwit.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import screwit.model.User;
 
 import java.util.List;
 
-public interface UserDao {
+public interface UserDao extends JpaRepository<User, Long> {
     User getUserById(long id);
-    List<User> getAllUsers();
-    void delete(long id);
-    void edit(long id, User user);
-    void add(User user);
+    List<User> findAll();
+    void deleteById(long id);
+    User save(User user);
+
 
     UserDetails getUserByUsername(String s);
 }
