@@ -22,7 +22,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private  String password;
     @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    //@Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;

@@ -63,7 +63,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers("/hello").access("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')").anyRequest().authenticated();
+                .antMatchers("/*").access("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')").anyRequest().authenticated();
+
     }
 
     @Bean

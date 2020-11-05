@@ -6,14 +6,16 @@
     <title></title>
 </head>
 <body>
+<div th:insert="~{/logout::logout_button}"/>
+
 <div>
     User Name:
     <p th:text="${user.getUsername()}">VALUE</p>
     User ID:
     <p th:text="${user.getId()}">VALUE</p>
-    <a th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a>
+    <a th:href="@{/admin/{id}/edit(id=${user.getId()})}">Edit</a>
 
-    <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+    <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
         <input type="submit" value="Delete"/>
     </form>
 </div>

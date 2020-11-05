@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/admin")
 public class UserController {
     @Autowired
     UserService userService ;
@@ -21,20 +21,20 @@ public class UserController {
     public String showAllUsers(Model model){
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
-        return "/users/users";
+        return "users";
     }
 
     @GetMapping("/{id}")
     public String showUser(Model model, @PathVariable("id") int id){
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
-        return "/users/user";
+        return "/admin/user";
     }
 
     @GetMapping("/new")
     public String newUser(Model model){
         model.addAttribute("user", new User());
-        return "users/newuser";
+        return "admin/newuser";
     }
 
     @PostMapping
@@ -73,7 +73,7 @@ public class UserController {
 
 
 
-        return  "users/edit";
+        return  "admin/edit";
     }
 
     @PatchMapping("/{id}")
