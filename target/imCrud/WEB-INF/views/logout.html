@@ -1,0 +1,12 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring 4 Security + Thymeleaf Integration Example</title>
+</head>
+<body>
+<div th:fragment="logout_button">
+<form th:action="@{/logout}" method="POST">
+    <input type="submit" value="Logout"/>
+</form>
+</div>
+</body>
+</html>
