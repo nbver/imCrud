@@ -17,6 +17,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @Configuration
 @ComponentScan("screwit")
 @EnableWebMvc
+
 public class SpringConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
