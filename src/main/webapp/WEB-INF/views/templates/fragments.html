@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:text="${#authentication.principal.something}">
+    The value of the "name" property of the authentication object should appear here.
+</div>
+
+<span th:if="${principal != null}" th:text="${principal.getUsername()}"  class="font-weight-bold">no principal object has found</span>
+with roles: <span th:text="${principal.isAdmin()} ? 'ADMIN': ' '" /><span th:text="${principal.isUser()} ? ' USER': ' '"/>
+
+
+<div class="col-sm-2">
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><span th:text="${#authentication.principal.isAdmin()} ? 'ADMIN'"/></li>
+        <br/>
+        <li class="nav-item"><span th:text="${#authentication.principal.isUser()} ? ' USER'"/></li>
+    </ul>
+</div>
+
+<div th:each = "role : ${roleMap}">
+    <input type="checkbox" name = "list"  th:value="${role.key}" th:checked="${role.value}" />
+    <label th:text = "${role.key}"></label>
+</div>
+
+
+<form th:method="POST" th:action="@{/admin}">
+    <div th:object="${newuser}">
+        <div class="form-group">
+            <p class="text-center"><b>Username</b></p>
+            <input type="text" class="form-control"
+                   name="usernameNew" id="usernameNew"
+                   th:field="*{username}">
+        </div>
+        <div class="form-group">
+            <p class="text-center"><b>Password</b></p>
+            <input type="text" class="form-control"
+                   name="passwordNew" id="passwordNew"
+                   th:field="*{password}"
+            >
+        </div>
+    </div>
+    <p class="text-center"><b>Roles</b></p>
+    <div align="center">
+        <input type="checkbox" name="list"
+               value="ROLE_ADMIN"
+        />
+        <label>ADMIN</label>
+        <input type="checkbox" name="list"
+               value="ROLE_USER"
+               checked readonly/>
+        <label>USER</label>
+    </div>
+    <div align="center">
+        <button type="submit" class="btn btn-primary">
+            Add new user
+        </button>
+    </div>
+
+</form>
+
+
+</body>
+</html>

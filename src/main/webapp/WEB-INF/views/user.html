@@ -1,24 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Admin panel</title>
 </head>
+
 <body>
-<div th:insert="~{/logout::logout_button}"/>
 
-User Name:
-<span th:text="${user.getUsername()}">VALUE</span>
-<br/>
-User ID:
-<span th:text="${user.getId()}">VALUE</span>
+<div class="container-fluid">
 
-<br/>
-<a th:href="@{/users}">Show All Users</a>
+    <div class="row p-2 mb-2 bg-dark text-white">
+        <div class="col-sm">
 
+            <span th:text="${#authentication.principal.getUsername()}">username</span>
+            with roles: <span th:text="${#authentication.principal.isAdmin()} ? 'ADMIN': ' '"/><span
+                th:text="${#authentication.principal.isUser()} ? ' USER': ' '"/>
+
+        </div>
+        <div class="col-sm" th:align="right">
+            <span th:insert="~{/logout::logout_button}"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-user-tab" data-toggle="pill" href="#v-pills-user" role="tab"
+                   aria-controls="v-pills-user" aria-selected="true">USER</a>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div class="tab-content" id="v-pills-tabContent">
+
+
+                <div class="tab-pane fade show active" id="v-pills-user" role="tabpanel"
+                     aria-labelledby="v-pills-user-tab">
+                    <div class="row">
+                        <div class="col bg-light">
+                            <br/>
+                            <h2>User information-page</h2>
+                            <hr/>
+                            <h4>About user</h4>
+
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Roles</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><span th:text="${#authentication.principal.getId()}"></span></td>
+                                <td><span th:text="${#authentication.principal.getUsername()}"></span></td>
+                                <td><span th:text="${#authentication.principal.getRolesInOneString()}"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
-
-
 
 </html>

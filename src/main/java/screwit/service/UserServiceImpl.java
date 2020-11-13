@@ -50,9 +50,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void add(User user) {
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleDao.findByRole("ROLE_USER"));
-        user.setRoles(roles);
         userDao.save(user);
     }
 

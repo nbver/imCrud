@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import screwit.model.User;
 import screwit.service.UserService;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -31,12 +30,16 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping("users")
-    public String showUsers(Model model) {
-        List<User> users = userService.getAllUsers();
-        model.addAttribute("users", users);
-        return "users";
-    }
+
+//    @GetMapping("users")
+//    public String showUsers(Model model) {
+//        List<User> users = userService.getAllUsers();
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User principal =(User) authentication.getPrincipal();
+//        model.addAttribute("users", users);
+//        model.addAttribute("principal", principal);
+//        return "admin/users";
+//    }
 
     @GetMapping("user/{id}")
     public String showUser(Model model, @PathVariable("id") int id){
@@ -47,6 +50,6 @@ public class LoginController {
             model.addAttribute("user", user);
             return "/user";
         }
-        return "redirect:/users";
+        return "admin/users";
     }
 }

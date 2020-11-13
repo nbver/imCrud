@@ -51,6 +51,19 @@ public class User implements UserDetails {
         return stringRoles;
     }
 
+    public String getRolesInOneString(){
+        StringBuilder sb = new StringBuilder();
+        if(isAdmin()){
+            sb.append("ADMIN ");
+        }
+        if(isUser()){
+            sb.append("USER ");
+        }
+
+        String result = sb.substring(0, sb.length()-1);
+        return result;
+    }
+
     public long getId() {
         return id;
     }
@@ -109,4 +122,28 @@ public class User implements UserDetails {
     public boolean hasRole(Role role){
         return roles.contains(role);
     }
+
+    public boolean isAdmin() {
+        for(Role role: roles) {
+            if (role.getRole().equals("ROLE_ADMIN") ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isUser() {
+        for(Role role: roles) {
+            if (role.getRole().equals("ROLE_USER") ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    boolean hasRole(String s){
+//
+//        return contains
+//    }
+
 }
