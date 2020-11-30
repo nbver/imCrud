@@ -85,17 +85,20 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-dbcp</artifactId>
-            <version>8.5.59</version>
-        </dependency>
-        <dependency>
+
+
+        <!--<dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>2.3.3.RELEASE</version>
-        </dependency>
+        </dependency>-->
 
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-rest -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
 
 
         <dependency>
@@ -110,7 +113,7 @@
 
     <build>
         <finalName>imCrud</finalName>
-        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+        <pluginManagement> lock down plugins versions to avoid using Maven defaults (may be moved to parent pom)
             <plugins>
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>

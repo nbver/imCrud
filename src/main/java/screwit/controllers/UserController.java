@@ -14,6 +14,7 @@ import screwit.service.UserService;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 @Controller
 @RequestMapping("/admin")
 public class UserController {

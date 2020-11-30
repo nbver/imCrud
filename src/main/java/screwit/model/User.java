@@ -141,6 +141,21 @@ public class User implements UserDetails {
         return false;
     }
 
+    public User(SimplifiedUser simplifiedUser){
+        this.roles = new HashSet<>();
+        this.username = simplifiedUser.getUsername();
+        this.password = simplifiedUser.getPassword();
+
+        if (simplifiedUser.isAdmin()){
+            this.roles.add(new Role(2L,"ROLE_ADMIN"));
+        }
+
+        if (simplifiedUser.isUser()){
+            this.roles.add(new Role(1L,"ROLE_USER"));
+        }
+
+    }
+
 //    boolean hasRole(String s){
 //
 //        return contains

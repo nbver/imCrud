@@ -38,10 +38,10 @@ public class LoginController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User principalUser =(User) authentication.getPrincipal();
         User user = userService.getUserById(id);
-        if (principalUser.getId() == user.getId()){
+        //if (principalUser.getId() == user.getId()){
             model.addAttribute("user", user);
             return "/user";
-        }
-        return "admin/users";
+//        }
+//        return "admin/users";
     }
 }

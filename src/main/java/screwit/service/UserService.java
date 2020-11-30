@@ -14,4 +14,5 @@ public interface UserService {
     void add(User user);
     Set<Role> findAllRoles();
     Role findRole(String role);
+    User findByUsername(String username);
 }
